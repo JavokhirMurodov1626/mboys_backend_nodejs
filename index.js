@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require('cors');
+const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const { PrismaClient } = require("@prisma/client");
@@ -24,7 +24,7 @@ app.use(helmet());
 app.use("/api", limiter);
 
 app.post("/post", async (req, res) => {
-    console.log(req.body);
+
   const { bnbAddress, mboysAmount, tonAddress } = req.body;
 
   if (!bnbAddress || !mboysAmount || !tonAddress) {
@@ -54,7 +54,7 @@ app.post("/post", async (req, res) => {
 
       return res.status(200).json({
         status: "success",
-        message: "Post updated successfully",
+        message: "Ton address muvaffaqiyatli yangilandi",
         data: {
           post: updatedPost,
         },
@@ -71,7 +71,7 @@ app.post("/post", async (req, res) => {
 
     res.status(201).json({
       status: "success",
-      message: "Post created successfully",
+      message: "Ton address muvaffaqiyatli saqlandi",
       data: {
         post: newPost,
       },
