@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require('cors');
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const { PrismaClient } = require("@prisma/client");
@@ -7,8 +8,8 @@ const { PrismaClient } = require("@prisma/client");
 const app = express();
 const prisma = new PrismaClient();
 
+app.use(cors());
 app.use(express.json()); // Middleware to parse JSON bodies
-
 // Rate limiting
 const limiter = rateLimit({
   max: 1000,
@@ -23,6 +24,7 @@ app.use(helmet());
 app.use("/api", limiter);
 
 app.post("/post", async (req, res) => {
+    console.log(req.body);
   const { bnbAddress, mboysAmount, tonAddress } = req.body;
 
   if (!bnbAddress || !mboysAmount || !tonAddress) {
